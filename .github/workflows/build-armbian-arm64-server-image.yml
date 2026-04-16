@@ -254,6 +254,7 @@ on:
         type: choice
         options:
           - ophub/kernel
+          - zbjaaa1/Amlogic-s9xxx-kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
