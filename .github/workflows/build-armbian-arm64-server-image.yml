@@ -400,13 +400,6 @@ jobs:
           echo "build_tag=Armbian_${{ inputs.set_release }}_arm64_${{ inputs.armbian_edition }}_$(date +"%Y.%m")" >> ${GITHUB_ENV}
           echo "status=success" >> ${GITHUB_OUTPUT}
   
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Armbian image
-          retention-days: 1
-          path: |
-            build/output/images/*.img.gz
-
       - name: Upload Armbian image to Release
         uses: ncipollo/release-action@main
         if: ${{ steps.clean.outputs.status == 'success' && !cancelled() }}
@@ -430,6 +423,13 @@ jobs:
           kernel_usage: ${{ inputs.kernel_usage }}
           armbian_fstype: ${{ inputs.armbian_fstype }}
           builder_name: ${{ inputs.builder_name }}
+        
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Armbian image
+          retention-days: 1
+          path: |
+            build/output/images/*.img.gz
 
       - name: Upload rebuilt images to Release
         uses: ncipollo/release-action@main
